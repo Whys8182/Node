@@ -15,6 +15,12 @@ dns:
     fallback: ['tls://1.0.0.1:853', 'https://cloudflare-dns.com/dns-query', 'https://dns.google/dns-query']
     fallback-filter: { geoip: true, ipcidr: [240.0.0.0/4, 0.0.0.0/32] }
 proxies:
+    - { name: 美国A, type: ss, server: xj.freev2r.xyz, port: 52187, cipher: chacha20-ietf-poly1305, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true }    
+    - { name: 美国B, type: trojan, server: nt5.freev2r.xyz, port: 520, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true, sni: nt5.freev2r.xyz, skip-cert-verify: true }
+    - { name: 美国C, type: trojan, server: zf.freev2r.xyz, port: 42083, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true, sni: nt12.freev2r.xyz, skip-cert-verify: true }
+    - { name: 美国D, type: trojan, server: nt14.freev2r.xyz, port: 2083, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true, sni: nt14.freev2r.xyz, skip-cert-verify: true }
+    - { name: 美国E, type: trojan, server: nt18.freev2r.xyz, port: 2087, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true, sni: nt18.freev2r.xyz, skip-cert-verify: true }
+    - { name: 美国F, type: vmess, server: nv7.freev2r.xyz, port: 2022, uuid: 741f1653-a334-4b32-890b-da2355399d53, alterId: 0, cipher: auto, udp: true, network: ws, ws-path: /, ws-headers: { Host: pull.free.video.10010.com } }
     - { name: 加拿大A, type: ss, server: xj.freev2r.xyz, port: 52196, cipher: chacha20-ietf-poly1305, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true }
     - { name: 加拿大B, type: trojan, server: zf.freev2r.xyz, port: 52087, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true, sni: nt13.freev2r.xyz, skip-cert-verify: true }
     - { name: 日本A, type: ss, server: ns10.freev2r.xyz, port: 2087, cipher: chacha20-ietf-poly1305, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true }
@@ -25,16 +31,11 @@ proxies:
     - { name: 新加坡B, type: trojan, server: mz.freev2r.xyz, port: 32053, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true, sni: nt11.freev2r.xyz, skip-cert-verify: true }
     - { name: 新加坡C, type: trojan, server: nt16.freev2r.xyz, port: 2053, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true, sni: nt16.freev2r.xyz, skip-cert-verify: true }
     - { name: 新加坡D, type: trojan, server: nt17.freev2r.xyz, port: 2083, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true, sni: nt17.freev2r.xyz, skip-cert-verify: true }
-    - { name: 美国A, type: trojan, server: nt5.freev2r.xyz, port: 520, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true, sni: nt5.freev2r.xyz, skip-cert-verify: true }
-    - { name: 美国B, type: trojan, server: zf.freev2r.xyz, port: 42083, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true, sni: nt12.freev2r.xyz, skip-cert-verify: true }
-    - { name: 美国C, type: trojan, server: nt14.freev2r.xyz, port: 2083, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true, sni: nt14.freev2r.xyz, skip-cert-verify: true }
-    - { name: 美国D, type: trojan, server: nt18.freev2r.xyz, port: 2087, password: 741f1653-a334-4b32-890b-da2355399d53, udp: true, sni: nt18.freev2r.xyz, skip-cert-verify: true }
-    - { name: 美国E, type: vmess, server: nv7.freev2r.xyz, port: 2022, uuid: 741f1653-a334-4b32-890b-da2355399d53, alterId: 0, cipher: auto, udp: true, network: ws, ws-path: /, ws-headers: { Host: pull.free.video.10010.com } }
     - { name: 韩国A, type: vmess, server: df.freev2r.xyz, port: 51520, uuid: 741f1653-a334-4b32-890b-da2355399d53, alterId: 0, cipher: auto, udp: true, network: ws, ws-path: /, ws-headers: { Host: pull.free.video.10010.com } }
 proxy-groups:
-    - { name: 奇点, type: select, proxies: [自动选择, 故障转移, 加拿大A, 加拿大B, 日本A, 日本B, 日本C, 日本D, 新加坡A, 新加坡B, 新加坡C, 新加坡D, 美国A, 美国B, 美国C, 美国D, 美国E, 韩国A] }
-    - { name: 自动选择, type: url-test, proxies: [加拿大A, 加拿大B, 日本A, 日本B, 日本C, 日本D, 新加坡A, 新加坡B, 新加坡C, 新加坡D, 美国A, 美国B, 美国C, 美国D, 美国E, 韩国A], url: 'http://www.gstatic.com/generate_204', interval: 86400 }
-    - { name: 故障转移, type: fallback, proxies: [加拿大A, 加拿大B, 日本A, 日本B, 日本C, 日本D, 新加坡A, 新加坡B, 新加坡C, 新加坡D, 美国A, 美国B, 美国C, 美国D, 美国E, 韩国A], url: 'http://www.gstatic.com/generate_204', interval: 7200 }
+    - { name: 奇点, type: select, proxies: [自动选择, 故障转移, 美国A, 美国B, 美国C, 美国D, 美国E, 美国F, 加拿大A, 加拿大B, 日本A, 日本B, 日本C, 日本D, 新加坡A, 新加坡B, 新加坡C, 新加坡D, 韩国A] }
+    - { name: 自动选择, type: url-test, proxies: [美国A, 美国B, 美国C, 美国D, 美国E, 美国F, 加拿大A, 加拿大B, 日本A, 日本B, 日本C, 日本D, 新加坡A, 新加坡B, 新加坡C, 新加坡D, 韩国A], url: 'http://www.gstatic.com/generate_204', interval: 86400 }
+    - { name: 故障转移, type: fallback, proxies: [美国A, 美国B, 美国C, 美国D, 美国E, 美国F, 加拿大A, 加拿大B, 日本A, 日本B, 日本C, 日本D, 新加坡A, 新加坡B, 新加坡C, 新加坡D, 韩国A], url: 'http://www.gstatic.com/generate_204', interval: 7200 }
 rules:
     - 'DOMAIN,qd.freev2r.xyz,DIRECT'
     - 'DOMAIN-SUFFIX,services.googleapis.cn,奇点'
